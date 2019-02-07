@@ -1,5 +1,5 @@
 (function() {
-  var childProcess = require("child_process");
+  const childProcess = require('child_process');
   childProcess.spawn = require('cross-spawn');
 })();
 export default {

@@ -1,19 +1,25 @@
-/*
- * @Author: Jan-superman 
- * @Date: 2018-09-27 20:38:43 
- * @Last Modified by: superman
- * @Last Modified time: 2018-12-24 23:40:44
- */
-
-@import '~antd-mobile/dist/antd-mobile.less';
-
-.index {
+.container {
   width: 100%;
+  overflow: hidden;
   position: relative;
-  .square {
-    width: 100%;
-    height: 200px;
-    background-color: #ccc;
-    margin-bottom: 10px;
+  .main {
+    width: 6rem;
+    height: 8rem;
+    position: relative;
+    top: 2.5rem;
+    margin: 0 auto;
+  }
+  .circle {
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid red;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px gray;
+
+    text-align: center;
+    margin: 0 auto;
+    span {
+      color: blue;
+    }
   }
 }

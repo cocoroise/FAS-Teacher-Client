@@ -10,7 +10,8 @@ module.exports = {
     jasmine: true,
   },
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js'] }],
+    'linebreak-style': 0,
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/jsx-wrap-multilines': 0,
     'react/prop-types': 0,
     'react/forbid-prop-types': 0,
