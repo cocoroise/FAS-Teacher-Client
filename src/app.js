@@ -1,3 +1,7 @@
+(function() {
+  var childProcess = require("child_process");
+  childProcess.spawn = require('cross-spawn');
+})();
 export default {
   config: {
     onError(e) {

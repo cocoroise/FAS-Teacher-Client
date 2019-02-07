@@ -4,8 +4,8 @@ export default [
     component: '../layouts/BasicLayout',
     routes: [
       { path: '/', component: './index/index', title: '首页' },
-      { path: '/category', component: './category/index', title: '分类' },
-      { path: '/test', component: './test/index', title: '测试页面' },
+      { path: '/attendance', component: './attendance/index', title: '考勤信息' },
+      { path: '/info', component: './info/index', title: '个人信息' },
       {
         path: '/exception',
         component: '../layouts/ExceptionLayout',

@@ -1,12 +1,5 @@
-/*
- * @Author: Jan-superman 
- * @Date: 2018-10-14 16:02:56 
- * @Last Modified by: superman
- * @Last Modified time: 2018-12-25 00:56:08
- */
 
 import fetch from 'dva/fetch';
-import { Toast } from 'antd-mobile';
 import router from 'umi/router';
 import hash from 'hash.js';
 
@@ -33,7 +26,8 @@ const checkStatus = response => {
     return response;
   }
   const errortext = codeMessage[response.status] || response.statusText;
-  Toast.offline(`请求错误 ${response.status}: ${response.url},${errortext}`);
+  // Toast.offline(`请求错误 ${response.status}: ${response.url},${errortext}`);
+
   const error = new Error(errortext);
   error.name = response.status;
   error.response = response;
@@ -42,8 +36,8 @@ const checkStatus = response => {
 
 const cachedSave = (response, hashcode) => {
   /**
-   * Clone a response data and store it in sessionStorage
-   * Does not support data other than json, Cache only json
+   * 拷贝相应的数据并保存在 sessionStorage 里
+   * 只支持 json
    */
   const contentType = response.headers.get('Content-Type');
   if (contentType && contentType.match(/application\/json/i)) {
@@ -60,7 +54,7 @@ const cachedSave = (response, hashcode) => {
 };
 
 /**
- * Requests a URL, returning a promise.
+ * 请求一个 URL, 返回一个 promise.
  *
  * @param  {string} url       The URL we want to request
  * @param  {object} [option] The options we want to pass to "fetch"
@@ -76,6 +70,7 @@ export default function request(url, option) {
    * Maybe url has the same parameters
    */
   const fingerprint = url + (options.body ? JSON.stringify(options.body) : '');
+  // 数据加密
   const hashcode = hash
     .sha256()
     .update(fingerprint)
@@ -87,20 +82,23 @@ export default function request(url, option) {
   const newOptions = { ...defaultOptions, ...options };
   if (
     newOptions.method === 'POST' ||
-    newOptions.method === 'PUT' ||
+    newOptions.method === 'PATCH' ||
     newOptions.method === 'DELETE'
   ) {
     if (!(newOptions.body instanceof FormData)) {
       newOptions.headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin':'*',
         ...newOptions.headers,
       };
+      // post patch delete在这里做stringify
       newOptions.body = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
       newOptions.headers = {
         Accept: 'application/json',
+        'Access-Control-Allow-Origin':'*',
         ...newOptions.headers,
       };
     }
@@ -134,14 +132,7 @@ export default function request(url, option) {
     })
     .catch(e => {
       const status = e.name;
-      //   if (status === 401) {
-      //     // @HACK
-      //     /* eslint-disable no-underscore-dangle */
-      //     window.g_app._store.dispatch({
-      //       type: 'login/logout',
-      //     });
-      //     return;
-      //   }
+
       // environment should not be used
       if (status === 403) {
         router.push('/exception/403');
@@ -152,7 +143,7 @@ export default function request(url, option) {
         return;
       }
       if (status >= 404 && status < 422) {
-        router.push('/404');
+        router.push('/exception/404');
       }
     });
 }
