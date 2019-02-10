@@ -1,21 +1,15 @@
-/*
- * @Author: Jan-superman 
- * @Date: 2018-09-27 20:38:14 
- * @Last Modified by: superman
- * @Last Modified time: 2018-12-25 00:51:39
- */
-
 import React, { PureComponent } from 'react';
 import MenuBar from '@/components/MenuBar';
 import NProgress from 'nprogress';
 import withRouter from 'umi/withRouter';
 import { connect } from 'dva';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import '@/layouts/nprogress.less';
 
 NProgress.configure({ showSpinner: false });
 
 // 底部有bar菜单
-const BarRoutes = ['/shop', '/', '/me', '/category'];
+const BarRoutes = ['/', '/info', '/attendance'];
 let currHref = '';
 
 class BasicLayout extends PureComponent {
@@ -38,7 +32,11 @@ class BasicLayout extends PureComponent {
 
     return (
       <div style={{ overflowX: 'hidden' }}>
-        <MenuBar pathname={location.pathname}>{children}</MenuBar>
+        <TransitionGroup>
+          <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
+            <MenuBar pathname={location.pathname}>{children}</MenuBar>
+          </CSSTransition>
+        </TransitionGroup>
       </div>
     );
   }

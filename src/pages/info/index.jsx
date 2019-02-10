@@ -7,7 +7,7 @@ import BizIcon from '../../components/BizIcon';
 import style from './index.less';
 
 // connect视图和state
-@connect(({ info }) => ({ info }))
+@connect(({ info }) => info)
 class Info extends Component {
   handleEdit = () => {
     Router.push('/info/edit');
@@ -32,16 +32,8 @@ class Info extends Component {
             <Card.Body>
               <List className={style.card.content}>
                 <List.Item className={style.list_item}>
-                  学号:
-                  {info.stu_id}
-                </List.Item>
-                <List.Item>
-                  班级:
-                  {info.class_name}
-                </List.Item>
-                <List.Item>
-                  专业:
-                  {info.major_name}
+                  教师工号:
+                  {info.teacher_id}
                 </List.Item>
                 <List.Item>
                   学院:
@@ -52,8 +44,20 @@ class Info extends Component {
                   {info.phone}
                 </List.Item>
                 <List.Item>
-                  EMAIL:
-                  {info.email}
+                  状态:
+                  {info.state}
+                </List.Item>
+                <List.Item>
+                  入职时间:
+                  {info.entertime}
+                </List.Item>
+                <List.Item>
+                  籍贯:
+                  {info.hometown}
+                </List.Item>
+                <List.Item>
+                  民族:
+                  {info.nation}
                 </List.Item>
               </List>
             </Card.Body>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List, Flex, InputItem, WhiteSpace, Button, Toast } from 'antd-mobile';
 import style from './login.less';
 import Router from 'umi/router';
-import { userLogin } from '@/services';
+import { getInfo } from '@/services';
 
 class Login extends Component {
   state = {
@@ -22,13 +22,16 @@ class Login extends Component {
       state: { value: pwd },
     } = this.pwdRef;
     // 请求服务器数据
-    userLogin({ id, pwd })
-      .then(() => {
-        Toast.success('登录成功，正在跳转...', 0.8);
-        Router.push(`/info?id=${id}`);
+    getInfo({ teacher_id: id })
+      .then(res => {
+        const password = res.data[0].pwd;
+        if (password === pwd) {
+          Toast.success('登录成功，正在跳转...', 0.8);
+          Router.replace(`/info?id=${id}`);
+        }
       })
       .catch(() => {
-        Toast.fail('password error');
+        Toast.fail('password error', 0.8);
         this.setState({ loading: false });
       });
   };
@@ -49,7 +52,7 @@ class Login extends Component {
                   }}
                   className={style.loginInput}
                 >
-                  学号：
+                  教师号：
                 </InputItem>
               </List>
             </Flex.Item>

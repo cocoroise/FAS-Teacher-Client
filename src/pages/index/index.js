@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
 import Router from 'umi/router';
+import withRouter from 'umi/withRouter';
+import { connect } from 'dva';
 import styles from './index.less';
 
+@connect(({ info }) => info)
 class Index extends PureComponent {
   handleClick = () => {
-    Router.push('/select');
+    const { info } = this.props;
+    Router.push(`/select?id=${info.teacher_id}`);
   };
 
   render() {
@@ -20,4 +24,4 @@ class Index extends PureComponent {
   }
 }
 
-export default Index;
+export default withRouter(Index);

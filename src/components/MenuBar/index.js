@@ -22,7 +22,7 @@ const tabBarData = [
     title: '我的',
     icon: 'wode',
     selectedIcon: 'wode',
-    link: '/me',
+    link: '/info',
   },
 ];
 
