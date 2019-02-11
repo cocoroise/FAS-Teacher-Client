@@ -12,22 +12,19 @@ const buttonStyle = {
 };
 
 class Edit extends PureComponent {
-  state = {
-    loading: false,
-  };
-
   // 验证数据并提交数据
   handleClick = () => {
     this.props.form.validateFields(async (error, value) => {
       if (error) {
         console.log('error->', error);
       } else {
-        console.log('------before fetch-----', this.props.info);
-        await updateInfo(this.props.info)
+        const { teacher_id } = this.props.info;
+        Object.assign(value, { teacher_id });
+        await updateInfo(value)
           .then(res => {
             if (res.code === 0) {
               Toast.success('修改成功', 0.6);
-              Router.push(`/info?id=${this.props.info.stu_id}`);
+              Router.push(`/info?id=${teacher_id}`);
             }
           })
           .catch(err => {
@@ -70,6 +67,7 @@ class Edit extends PureComponent {
             {this.errorCom('name')}
             <InputItem
               clear
+              type="number"
               placeholder="请输入年龄"
               {...getFieldProps('age', {
                 rules: [{ required: true, max: 3 }],
@@ -138,7 +136,7 @@ const artifectForm = createForm({
 })(Edit);
 const mapDispatchToProps = dispatch => ({
   save: data => {
-    dispatch({ type: 'info/save', payload: data });
+    dispatch({ type: 'save', payload: data });
   },
 });
 // 先生成form组件再connect 不然props传不进去

@@ -11,6 +11,8 @@ import {
   Steps,
   InputItem,
   Stepper,
+  NavBar,
+  Icon,
 } from 'antd-mobile';
 import { unique, formatDate } from '@/util/tools';
 import style from './index.less';
@@ -112,6 +114,9 @@ class Select extends Component {
     } = this.state;
     return (
       <div className={style.container}>
+        <NavBar mode="dark" icon={<Icon type="left" />} onLeftClick={() => Router.push('/')}>
+          开启一条考勤
+        </NavBar>
         <div className={style.step}>
           <Steps size="small" direction="horizontal" current={step}>
             <Step title="课程" />

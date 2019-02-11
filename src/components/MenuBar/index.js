@@ -8,14 +8,14 @@ import theme from '@/theme';
 const tabBarData = [
   {
     title: '首页',
-    icon: 'shouye',
-    selectedIcon: 'shouye',
+    icon: 'home',
+    selectedIcon: 'home',
     link: '/',
   },
   {
     title: '考勤',
-    icon: 'fenlei',
-    selectedIcon: 'fenlei',
+    icon: 'qingdan',
+    selectedIcon: 'qingdan',
     link: '/attendance',
   },
   {

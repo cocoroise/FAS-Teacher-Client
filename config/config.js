@@ -53,5 +53,6 @@ export default {
   hash: true,
   alias: {
     '@': path.resolve(__dirname, 'src'),
+    '@Components': path.resolve(__dirname, 'src/components/'),
   },
 };

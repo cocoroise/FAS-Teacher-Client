@@ -1,11 +1,11 @@
 .container {
   width: 100vw;
-  height:100vh;
+  height:80vh;
   overflow: hidden;
   position: relative;
   .step{
     position: absolute;
-    top:2rem;
+    top:1.5rem;
     left:-.2rem;
     right:0;
     margin:0 auto;
@@ -13,7 +13,8 @@
   .main {
     width: 6rem;
     position: relative;
-    top: 4.5rem;
+    top: 50%;
+    transform: translateY(-50%);
     margin: 0 auto;
   }
   .circle {
@@ -26,11 +27,14 @@
 
     text-align: center;
     margin: 0 auto;
-    span {
-      color: blue;
-      font-size: 80px;
+    .open {
+      color: purple;
+      font-size: 70px;
       position: relative;
-      top:1.5rem;
+      top:1rem;
+      i{
+        font-size:100px;
+      }
     }
   }
 }
