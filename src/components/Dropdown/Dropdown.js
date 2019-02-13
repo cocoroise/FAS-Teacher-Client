@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BizIcon from '@/components/BizIcon';
-import './index.less';
+import style from './index.less';
 
 class Dropdown extends Component {
   constructor(props) {
@@ -33,13 +33,14 @@ class Dropdown extends Component {
     });
   }
 
-  selectItem(title, id, stateKey) {
+  selectItem(title, id, stateKey,cid) {
     this.setState(
       {
         headerTitle: title,
         listOpen: false,
       },
-      this.props.resetThenSet(id, stateKey)
+      // id是自然数从0开始的，cid是主键
+      this.props.resetThenSet(id, stateKey,cid)
     );
   }
 
@@ -53,20 +54,20 @@ class Dropdown extends Component {
     const { list } = this.props;
     const { listOpen, headerTitle } = this.state;
     return (
-      <div className="dd-wrapper">
-        <div className="dd-header" onClick={() => this.toggleList()}>
-          <div className="dd-header-title">
+      <div className={style.dd_wrapper}>
+        <div className={style.dd_header} onClick={() => this.toggleList()}>
+          <div className={style.dd_header_title}>
             {headerTitle}
             {listOpen ? <BizIcon type="icon_arrow_up" /> : <BizIcon type="icon_arrow_down" />}
           </div>
         </div>
         {listOpen && (
-          <ul className="dd-list" onClick={e => e.stopPropagation()}>
+          <ul className={style.dd_list} onClick={e => e.stopPropagation()}>
             {list.map(item => (
               <li
-                className="dd-list-item"
+                className={style.dd_list_item}
                 key={item.id}
-                onClick={() => this.selectItem(item.title, item.id, item.key)}
+                onClick={() => this.selectItem(item.title, item.id, item.key,item.cid)}
               >
                 {item.title} {item.selected && <BizIcon type="dingzhi" />}
               </li>

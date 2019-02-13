@@ -1,7 +1,7 @@
 {
-  "name": "shop",
+  "name": "fasteacherclient",
   "version": "1.0.0",
-  "description": "新版商城",
+  "description": "人脸考勤系统-教师端",
   "private": true,
   "scripts": {
     "dev": "cross-env PORT=8099 umi dev",

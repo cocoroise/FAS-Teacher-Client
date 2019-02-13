@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import F2 from '@antv/f2';
+import F2 from '@antv/f2/lib/index';
+
+const ScrollBar = require('@antv/f2/lib/plugin/scroll-bar');
+require('@antv/f2/lib/interaction/');
 
 export default class extends Component {
   static propTypes = {
@@ -42,12 +45,13 @@ export default class extends Component {
       width,
       height,
       pixelRatio: window.devicePixelRatio,
+      plugins: ScrollBar
     });
     creator(chart, data);
     this.chart = chart;
   };
 
   render() {
-    return <canvas id={this.id}/>;
+    return <canvas id={this.id} />;
   }
 }

@@ -1,21 +1,17 @@
 import React from 'react';
 import Chart from './chart';
 
+require('@antv/f2/lib/interaction/pan');
+
 export default function(props) {
   const creator = (chart, data) => {
     const { source, type } = data;
     chart.source(source);
     // scale转换数据
-    chart.scale('date', { type: 'timeCat', tickCount: 5 });
-    chart.scale('value', { tickCount: 5 });
+    chart.scale('date', { type: 'timeCat', tickCount: 5,mask: 'MM-DD',range: [0, 1]});
+    chart.scale('value', { type: 'linear', min: 0, max: 100, tickCount: 5 });
     chart.axis('date', {
       label(text, index, total) {
-        if (index === 0) {
-          return { fontSize: 30, textAlign: 'left' };
-        }
-        if (index === total - 1) {
-          return { fontSize: 30, textAlign: 'right' };
-        }
         return { fontSize: 30 };
       },
     });
@@ -44,9 +40,12 @@ export default function(props) {
     chart.tooltip({
       custom: false,
       showXTip: true,
+      xTip: { fontSize: 40 },
+      yTip: { fontSize: 40 },
       showYTip: true,
       showCrosshairs: true,
       showItemMarker: false,
+      snap: true,
       background: {
         radius: 2,
         fill: '#1890FF',
@@ -71,7 +70,7 @@ export default function(props) {
         });
         tooltipItems.forEach(({ name, value }) => {
           if (map[name]) {
-            map[name].value = Number(value).toFixed(2);
+            map[name].value = `${value}%`;
           }
         });
         legend.setItems(Object.values(map));
@@ -104,6 +103,15 @@ export default function(props) {
           marginRatio: 0.05,
         });
     }
+    // 滚动条
+    chart.interaction('pan');
+    chart.scrollBar({
+      mode: 'x',
+      xStyle: {
+        offsetY: -5,
+      },
+    });
+
     chart.render();
   };
 
@@ -116,11 +124,9 @@ export default function(props) {
   const source = [];
 
   props.data.forEach(({ name, stats }) => {
-    stats.forEach(({ t, v }) => {
-      const date = t.split('');
-      date.splice(4, 0, '-');
-      date.push('-01');
-      source.push({ type: name, date: date.join(''), value: v });
+    stats.forEach(v => {
+      // let formatDate = v.date.slice(5);
+      source.push({ type: name, date: v.date, value: v.attendance_percentage });
     });
   });
 
