@@ -5,6 +5,7 @@ export default [
     routes: [
       { path: '/', component: './index/index', title: '首页' },
       { path: '/select', component: './index/select', title: '开启考勤记录' },
+      { path: '/index/detail', component: './index/detail', title: '考勤详情' },
       { path: '/attendance', component: './attendance/index', title: '考勤信息' },
       { path: '/info', component: './info/index', title: '个人信息' },
       { path: '/info/edit', component: './info/edit', title: '修改个人信息' },

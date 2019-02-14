@@ -8,6 +8,10 @@ export async function getAttendanceOfTeacher(params) {
 export async function lineChartDataOfTeacher(params) {
   return request(`${host}/api/lineChartDataOfTeacher?${stringify(params)}`);
 }
+// GET学生考勤图 传attendance_id 返回所有需要考勤的学生信息
+export async function getStuAttendanceList(params) {
+  return request(`${host}/api/getStuAttendanceList?${stringify(params)}`);
+}
 // GET总体的考勤信息
 export async function getAttenInfo(params) {
   return request(`${host}/api/attendance?${stringify(params)}`);

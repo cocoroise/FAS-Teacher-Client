@@ -1,0 +1,34 @@
+.container {
+  position: relative;
+  height: 100vh;
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+  .gridContainer {
+    margin-top: 0.7rem;
+    border: 1px solid white;
+    box-shadow: 2px 2px 2px rgba(255, 192, 203, 0.753), -2px -2px 2px rgba(255, 192, 203, 0.644);
+    opacity: 0.8;
+    .grid {
+      font-size: 35px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      i {
+        font-size: 65px;
+      }
+      .gridBox {
+        width: 80%;
+        margin: 0 auto;
+        background-image: radial-gradient(73% 147%, #eadfdf 59%, #ece2df 100%),
+          radial-gradient(91% 146%, rgba(255, 255, 255, 0.5) 47%, rgba(0, 0, 0, 0.5) 100%);
+        background-blend-mode: screen;
+      }
+    }
+  }
+  .cardContainer {
+    position: fixed;
+    bottom: 0.2rem;
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

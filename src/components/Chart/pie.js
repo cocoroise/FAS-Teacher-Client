@@ -7,6 +7,7 @@ export default function(props) {
   const creator = (chart, data) => {
     const { source, type } = data;
     chart.source(source);
+    console.log(source)
     // scale转换数据
     chart.scale('date', { type: 'timeCat', tickCount: 5,mask: 'MM-DD',range: [0, 1]});
     chart.scale('value', { type: 'linear', min: 0, max: 100, tickCount: 5 });

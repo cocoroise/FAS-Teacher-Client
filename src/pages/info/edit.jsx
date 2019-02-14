@@ -50,7 +50,7 @@ class Edit extends PureComponent {
     const { getFieldProps } = this.props.form;
     return (
       <div className={styles.registerContainer}>
-        <NavBar mode="light" icon={<Icon type="left" />} onLeftClick={() => Router.push('/info')}>
+        <NavBar mode="dark" icon={<Icon type="left" />} onLeftClick={() => Router.push('/info')}>
           编辑信息
         </NavBar>
         <div className={styles.list}>

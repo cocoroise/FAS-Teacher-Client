@@ -16,6 +16,7 @@ module.exports = {
     'no-underscore-dangle':0,
     'no-unused-vars':1,
     'no-console':0,
+    'no-nested-ternary':0,
     'linebreak-style': 0,
     'react/prop-types': 0,
     'react/no-unused-state':1,

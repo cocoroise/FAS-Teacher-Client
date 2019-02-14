@@ -1,14 +1,15 @@
 .container {
   width: 100vw;
-  height:80vh;
+  height: -webkit-fill-available;
   overflow: hidden;
   position: relative;
-  .step{
+  background-image: linear-gradient(to top, #9795f0d2 0%, #fbc8dc 100%);
+  .step {
     position: absolute;
-    top:1.5rem;
-    left:-.2rem;
-    right:0;
-    margin:0 auto;
+    top: 1.5rem;
+    left: -0.2rem;
+    right: 0;
+    margin: 0 auto;
   }
   .main {
     width: 6rem;
@@ -21,9 +22,9 @@
     width: 4rem;
     height: 4rem;
     position: relative;
-    border: 1px solid red;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
     border-radius: 50%;
-    box-shadow: 2px 2px 2px gray;
+    box-shadow: 2px 2px 2px rgb(229, 223, 235),-2px -2px 2px rgb(229, 223, 235);
 
     text-align: center;
     margin: 0 auto;
@@ -31,9 +32,9 @@
       color: purple;
       font-size: 70px;
       position: relative;
-      top:1rem;
-      i{
-        font-size:100px;
+      top: 1rem;
+      i {
+        font-size: 100px;
       }
     }
   }

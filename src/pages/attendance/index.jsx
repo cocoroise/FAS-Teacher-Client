@@ -21,9 +21,6 @@ class Attendance extends PureComponent {
 
   componentDidMount() {
     const { teacher_id } = this.props.info;
-    lineChartDataOfTeacher({ teacher_id: 1, course_id: 205, class_id: 1111 }).then(({ data }) => {
-      this.setState({ pieData: data });
-    });
     getAttendanceOfTeacher({ teacher_id }).then(res => {
       const uniRes = res.data.map(v => {
         return {
@@ -46,6 +43,10 @@ class Attendance extends PureComponent {
         return { class_id: v.class_id, class_name: v.class_name };
       });
       this.setState({ course: result, allClass: unique(classList) });
+      // 初始化图表的数据 默认第一个
+      lineChartDataOfTeacher({ teacher_id: 1, course_id: result[0].cid, class_id: classList[0].class_id }).then(({ data }) => {
+        this.setState({ pieData: data });
+      });
     });
   }
 

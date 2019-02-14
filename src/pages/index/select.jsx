@@ -91,7 +91,8 @@ class Select extends Component {
     };
     await addAttenInfo(params)
       .then(res => {
-        Router.replace('/');
+        const {data:{attendance_id}}=res
+        Router.push(`/index/detail?id=${attendance_id}`);
         Toast.success('开启考勤成功，正在跳转...', 0.8);
       })
       .catch(() => {
