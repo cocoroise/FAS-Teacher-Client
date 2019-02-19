@@ -4,9 +4,13 @@ import { stringify, request, host } from '../config';
 export async function getAttendanceOfTeacher(params) {
   return request(`${host}/api/attendanceOfteacher?${stringify(params)}`);
 }
-// GET教师考勤数据 折线图 传teacher_id,course_id,class_id
+// GET教师考勤数据 antv/f2 折线图 传teacher_id,course_id,class_id
 export async function lineChartDataOfTeacher(params) {
   return request(`${host}/api/lineChartDataOfTeacher?${stringify(params)}`);
+}
+// GET教师考勤数据 echart 折线图 传teacher_id,course_id
+export async function lineChartOfTeacher(params) {
+  return request(`${host}/api/lineChartOfTeacher?${stringify(params)}`);
 }
 // GET学生考勤图 传attendance_id 返回所有需要考勤的学生信息
 export async function getStuAttendanceList(params) {

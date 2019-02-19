@@ -16,4 +16,11 @@ function formatDate(date) {
   const timeStr = `${pad(date.getHours())}:${pad(date.getMinutes())}`;
   return `${dateStr} ${timeStr}`;
 }
-export { unique, formatDate };
+const pick = (obj, keys) => {
+  const r = {};
+  keys.forEach((key) => {
+    r[key] = obj[key];
+  });
+  return r;
+};
+export { unique, formatDate ,pick};

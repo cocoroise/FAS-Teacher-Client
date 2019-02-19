@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Flex, WhiteSpace, WingBlank, NavBar, Tag } from 'antd-mobile';
+import { WhiteSpace, WingBlank, NavBar, } from 'antd-mobile';
 import { connect } from 'dva';
-import LineChart from '@/components/Chart/line';
-import PieChart from '@/components/Chart/pie';
 import { Dropdown } from '@/components/Dropdown';
-import { getAttendanceOfTeacher, lineChartDataOfTeacher } from '@/services';
+import { getAttendanceOfTeacher, lineChartOfTeacher } from '@/services';
+import Chart from './lineChart';
 import { unique } from '@/util/tools';
 
 import style from './index.less';
@@ -12,16 +11,16 @@ import style from './index.less';
 @connect(({ info }) => info)
 class Attendance extends PureComponent {
   state = {
-    lineData: [],
-    pieData: [],
+    list: [],
+    axis: [],
     course: [],
-    allClass: [],
     selectCourse: '',
   };
 
   componentDidMount() {
-    const { teacher_id } = this.props.info;
-    getAttendanceOfTeacher({ teacher_id }).then(res => {
+    // const { teacher_id } = this.props.info;
+    getAttendanceOfTeacher({ teacher_id:1 }).then(res => {
+      // 给dropdown数据
       const uniRes = res.data.map(v => {
         return {
           title: v.course_name,
@@ -38,14 +37,18 @@ class Attendance extends PureComponent {
           v
         );
       });
+      this.setState({ course: result });
 
-      const classList = res.data.map(v => {
-        return { class_id: v.class_id, class_name: v.class_name };
-      });
-      this.setState({ course: result, allClass: unique(classList) });
-      // 初始化图表的数据 默认第一个
-      lineChartDataOfTeacher({ teacher_id: 1, course_id: result[0].cid, class_id: classList[0].class_id }).then(({ data }) => {
-        this.setState({ pieData: data });
+      // const { teacher_id, course_id } = this.state;
+      lineChartOfTeacher({ teacher_id:1, course_id: 205 }).then(r => {
+        const { data } = r;
+        let list = [];
+        Object.values(data).map(v => {
+          if (v.name) {
+            list.push(v);
+          }
+        });
+        this.setState({ list, axis: data.axis });
       });
     });
   }
@@ -59,51 +62,22 @@ class Attendance extends PureComponent {
     this.setState({
       [key]: temp,
     });
+    console.log('cccccccid',id,key,cid)
     this.setState({ selectCourse: cid });
   };
 
-  onChange = (selected, id) => {
-    const { teacher_id } = this.props.info;
-    const { selectCourse } = this.state;
-    lineChartDataOfTeacher({
-      teacher_id,
-      course_id: selectCourse,
-      class_id: id,
-    }).then(({ data }) => {
-      this.setState({ pieData: data });
-    });
-  };
-
   render() {
-    const { pieData, lineData, allClass } = this.state;
+    const { list, axis } = this.state;
     return (
       <div className={style.flex_container}>
         <NavBar mode="dark">考勤情况</NavBar>
         <WingBlank size="lg">
           <div className={style.select_section}>
             <Dropdown title="选择课程" list={this.state.course} resetThenSet={this.resetThenSet} />
-            <div className={style.tag_container}>
-              {allClass.map(v => {
-                const { class_id, class_name } = v;
-                return (
-                  <Tag key={class_id} onChange={selected => this.onChange(selected, class_id)}>
-                    {class_name}
-                  </Tag>
-                );
-              })}
-            </div>
           </div>
           <WhiteSpace size="lg" />
           <div className={style.chart}>
-            <Flex direction="column">
-              <Flex.Item>
-                <PieChart height={800} width={900} type="line" data={pieData} />
-              </Flex.Item>
-              <WhiteSpace size="lg" />
-              {/* <Flex.Item>
-                <PieChart height={800} width={900} type="bar" data={pieData} />
-              </Flex.Item> */}
-            </Flex>
+            <Chart list={list} axis={axis} />
           </div>
         </WingBlank>
         <WhiteSpace size="lg" />
