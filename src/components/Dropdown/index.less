@@ -1,7 +1,5 @@
 .dd_wrapper {
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   font-size: 40px;
   text-align: center;
@@ -10,6 +8,7 @@
   width: 2.6rem;
   height: 1rem;
   position: relative;
+  box-shadow: 5px 5px 5px #eee;
 }
 .dd_header {
   display: flex;
@@ -20,7 +19,7 @@
   position: relative;
   left: 0.4rem;
   top: 0.2rem;
-  background-color: navajowhite;
+  background-image: linear-gradient(-225deg, #20E2D7 0%, rgba(217, 241, 206, 0.932) 100%);
   text-align: center;
   .dd_header_title {
     font-weight: 400;
@@ -31,7 +30,7 @@
   }
   i {
     font-size: 40px;
-    color: burlywood;
+    color: rgb(218, 185, 143);
   }
 }
 
@@ -39,7 +38,8 @@
   z-index: 10;
   position: absolute;
   top: 1rem;
-  width: 3rem;
+  left:.2rem;
+  width: 4rem;
   border: 1px solid;
   border-top: none;
   border-bottom-right-radius: 3%;

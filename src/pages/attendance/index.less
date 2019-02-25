@@ -1,9 +1,25 @@
 .flex_container {
   position: relative;
-  .select_section {
-    margin-top:3px;
+  height: -webkit-fill-available;
+  width: 100%;
+  background: url('@/assets/chartBg.jpg') no-repeat;
+  background-size: cover;
+  .container {
+    position: relative;
+    height: 8.2rem;
     width: 100%;
-    font-size: 32px;
-  }
+    background: white;
+    border-radius: 3%;
 
+    .select_section {
+      margin-top: 50px;
+      width: 100%;
+      font-size: 32px;
+    }
+    .chart {
+      margin-top: 0.6rem;
+      margin-right: 0.2rem;
+      box-shadow: 5px 5px 10px rgba(220, 220, 220, 0.582);
+    }
+  }
 }

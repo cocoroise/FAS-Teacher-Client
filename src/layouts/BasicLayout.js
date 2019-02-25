@@ -5,6 +5,7 @@ import withRouter from 'umi/withRouter';
 import { connect } from 'dva';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import '@/layouts/nprogress.less';
+import './index.css'
 
 NProgress.configure({ showSpinner: false });
 
@@ -33,7 +34,7 @@ class BasicLayout extends PureComponent {
     return (
       <div style={{ overflowX: 'hidden' }}>
         <TransitionGroup>
-          <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
+          <CSSTransition key={location.pathname} classNames='move' timeout={300}>
             <MenuBar pathname={location.pathname}>{children}</MenuBar>
           </CSSTransition>
         </TransitionGroup>

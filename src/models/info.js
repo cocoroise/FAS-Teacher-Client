@@ -1,6 +1,7 @@
 import { getInfo, updateInfo } from '@/services';
 import Router from 'umi/router';
 import { getLocalStorage, setLocalStorage } from '@/util/helper';
+import { Toast } from 'antd-mobile';
 
 export default {
   namespace: 'info',
@@ -32,7 +33,6 @@ export default {
     // 没有缓存的时候
     save(state, { payload: info }) {
       const newState = Object.assign({}, state, info, { isLogined: true });
-      console.log('---info---models---reduce---', newState);
       return newState;
     },
   },
@@ -40,9 +40,10 @@ export default {
   subscriptions: {
     // 监听路由的变化 获取初始化数据
     setup({ dispatch, history }) {
-      const data = getLocalStorage('info');
       return history.listen(({ pathname, query }) => {
+        const data = getLocalStorage('info');
         if (pathname === '/info' && !data) {
+          Toast.fail('请先登录！')
           Router.replace('/login');
         } else {
           dispatch({ type: 'GetInfo', payload: query });

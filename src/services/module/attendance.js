@@ -4,10 +4,6 @@ import { stringify, request, host } from '../config';
 export async function getAttendanceOfTeacher(params) {
   return request(`${host}/api/attendanceOfteacher?${stringify(params)}`);
 }
-// GET教师考勤数据 antv/f2 折线图 传teacher_id,course_id,class_id
-export async function lineChartDataOfTeacher(params) {
-  return request(`${host}/api/lineChartDataOfTeacher?${stringify(params)}`);
-}
 // GET教师考勤数据 echart 折线图 传teacher_id,course_id
 export async function lineChartOfTeacher(params) {
   return request(`${host}/api/lineChartOfTeacher?${stringify(params)}`);
@@ -16,11 +12,15 @@ export async function lineChartOfTeacher(params) {
 export async function getStuAttendanceList(params) {
   return request(`${host}/api/getStuAttendanceList?${stringify(params)}`);
 }
-// GET总体的考勤信息
+// GET总体的考勤信息 传attendance_id
 export async function getAttenInfo(params) {
   return request(`${host}/api/attendance?${stringify(params)}`);
 }
-// POST一条考记录
+// POST一条考勤记录
 export async function addAttenInfo(params) {
   return request(`${host}/api/attendance`, { method: 'POST', body: params });
+}
+// PATCH一条考勤记录
+export async function updateAttenInfo(params) {
+  return request(`${host}/api/attendance`, { method: 'PATCH', body: params });
 }

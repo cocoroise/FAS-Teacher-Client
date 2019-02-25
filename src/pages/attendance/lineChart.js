@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactEcharts from '@/components/Chart';
-import echarts from 'echarts';
 
 export default class LineChart extends Component {
   onChartReady = chart => {
@@ -24,6 +23,7 @@ export default class LineChart extends Component {
       textStyle: {
         fontSize: 40,
       },
+      padding: [20, 10]
     },
     tooltip: {
       trigger: 'axis',
@@ -91,11 +91,11 @@ export default class LineChart extends Component {
       colorStops: [
         {
           offset: 0,
-          color: '#fff1eb', // 0% 处的颜色
+          color: '#eee', // 0% 处的颜色
         },
         {
           offset: 1,
-          color: '#c3cfe2', // 100% 处的颜色
+          color: '#f3e7e9', // 100% 处的颜色
         },
       ],
       global: false, // 缺省为 false
@@ -107,7 +107,7 @@ export default class LineChart extends Component {
       <ReactEcharts
         option={this.getOption()}
         onChartReady={this.onChartReady}
-        style={{ height: '700px', width: '100%' }}
+        style={{ height: '900px', width: '100%' }}
         className="react_for_echarts"
       />
     );

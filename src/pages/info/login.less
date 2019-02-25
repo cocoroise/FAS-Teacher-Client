@@ -1,13 +1,15 @@
 .loginContainer {
-  height: 100vh;
+  height: -webkit-fill-available;
   width: 100%;
   position: relative;
   text-align: center;
   font-size: 20px;
+  background: url('@/assets/loginBg.jpg') no-repeat;
+  background-size: cover;
 }
 .loginFlex {
   position: absolute;
-  border: 1px solid #7a00bf;
+  border: 1px solid rgb(229, 226, 226);
   border-radius: 2%;
   width: 80%;
   height: fit-content;
@@ -15,16 +17,18 @@
   bottom: 0;
   right: 0;
   left: 0;
-  margin: auto;
-  box-shadow: 2px 2px 2px 2px #eee;
+  margin:auto;
+  box-shadow: 6px 6px 10px #eee;
 }
-.loginInput {
-  border-bottom: 2px #f6d7eb;
-  font-size: 30px;
+.list{
+  color:#8fd3f4;
+  font-size: 40px;
 }
 .loginSubmit {
   color: white;
   background-color: #f6d7eb;
+  width: 80%;
+  margin:0 auto;
 }
 .loginLink {
   border: 1px solid;

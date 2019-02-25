@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Router from 'umi/router';
+import { connect } from 'dva';
 import { getAttendanceOfTeacher, addAttenInfo } from '@/services';
 import {
   List,
@@ -69,6 +70,7 @@ class Select extends Component {
         return { label: value.class_name, value: value.class_id };
       });
     });
+    data = unique(data);
     this.setState({ classData: [data] });
   };
 
@@ -91,8 +93,9 @@ class Select extends Component {
     };
     await addAttenInfo(params)
       .then(res => {
-        const {data:{attendance_id}}=res
-        Router.push(`/index/detail?id=${attendance_id}`);
+        const { data } = res;
+        this.props.save(data);
+        Router.push(`/index/detail?id=${data.attendance_id}`);
         Toast.success('开启考勤成功，正在跳转...', 0.8);
       })
       .catch(() => {
@@ -188,5 +191,17 @@ class Select extends Component {
     );
   }
 }
-
-export default Select;
+const mapStateToProps = state => {
+  return {
+    attendance_info: state.attendance,
+  };
+};
+const mapDispatch = (dispatch, ownProps) => {
+  return {
+    save: data => dispatch({ type: 'attendance/getInfo', payload: data }),
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatch
+)(Select);

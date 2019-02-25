@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { WhiteSpace, WingBlank, NavBar, } from 'antd-mobile';
+import { WhiteSpace, WingBlank, NavBar } from 'antd-mobile';
 import { connect } from 'dva';
 import { Dropdown } from '@/components/Dropdown';
 import { getAttendanceOfTeacher, lineChartOfTeacher } from '@/services';
@@ -19,7 +19,7 @@ class Attendance extends PureComponent {
 
   componentDidMount() {
     // const { teacher_id } = this.props.info;
-    getAttendanceOfTeacher({ teacher_id:1 }).then(res => {
+    getAttendanceOfTeacher({ teacher_id: 1 }).then(res => {
       // 给dropdown数据
       const uniRes = res.data.map(v => {
         return {
@@ -40,7 +40,7 @@ class Attendance extends PureComponent {
       this.setState({ course: result });
 
       // const { teacher_id, course_id } = this.state;
-      lineChartOfTeacher({ teacher_id:1, course_id: 205 }).then(r => {
+      lineChartOfTeacher({ teacher_id: 1, course_id: 205 }).then(r => {
         const { data } = r;
         let list = [];
         Object.values(data).map(v => {
@@ -62,7 +62,7 @@ class Attendance extends PureComponent {
     this.setState({
       [key]: temp,
     });
-    console.log('cccccccid',id,key,cid)
+    console.log('cccccccid', id, key, cid);
     this.setState({ selectCourse: cid });
   };
 
@@ -72,12 +72,18 @@ class Attendance extends PureComponent {
       <div className={style.flex_container}>
         <NavBar mode="dark">考勤情况</NavBar>
         <WingBlank size="lg">
-          <div className={style.select_section}>
-            <Dropdown title="选择课程" list={this.state.course} resetThenSet={this.resetThenSet} />
-          </div>
-          <WhiteSpace size="lg" />
-          <div className={style.chart}>
-            <Chart list={list} axis={axis} />
+          <div className={style.container}>
+            <div className={style.select_section}>
+              <Dropdown
+                title="选择课程"
+                list={this.state.course}
+                resetThenSet={this.resetThenSet}
+              />
+            </div>
+            <WhiteSpace size="lg" />
+            <div className={style.chart}>
+              <Chart list={list} axis={axis} />
+            </div>
           </div>
         </WingBlank>
         <WhiteSpace size="lg" />

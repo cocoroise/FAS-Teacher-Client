@@ -17,6 +17,7 @@
   "dependencies": {
     "antd-mobile": "^2.2.5",
     "better-scroll": "^1.13.2",
+    "delaunator": "^3.0.2",
     "dva": "^2.4.0",
     "echarts": "^4.1.0",
     "enzyme": "^3.4.4",

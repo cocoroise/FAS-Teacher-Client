@@ -14,6 +14,7 @@ class Detail extends Component {
     rawData: [],
     percent: 0,
     selectStu: [],
+    showCard: false,
   };
 
   componentDidMount() {
@@ -21,12 +22,18 @@ class Detail extends Component {
       this.fetchData();
       // 这里还要判断一下有没有到考勤结束的时间
     }, 2000);
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   // 卸载定时器
   componentWillUnmount() {
     clearInterval(this.intervalId);
+    window.removeEventListener('scroll', this.handleScroll);
   }
+
+  handleScroll = () => {
+    this.setState({ showCard: false });
+  };
 
   fetchData = () => {
     // 获取attendance_id
@@ -48,7 +55,7 @@ class Detail extends Component {
     const res = data.map(v => {
       // 设置图标的颜色和类别
       const tag = v.status === 0 ? 'frown' : v.status === 1 ? 'smile' : 'meh';
-      const color = v.status === 0 ? '#EE5F83' : v.status === 1 ? '#16CAC8' : '#FCC991';
+      const color = v.status === 0 ? '#EE5F83' : v.status === 1 ? '#00B147' : '#FAB200';
       return {
         text: v.name,
         icon: tag,
@@ -63,7 +70,9 @@ class Detail extends Component {
     let status = rawData[index].status;
     let time = rawData[index].time;
     status = status === 0 ? '未签到' : status === 1 ? '签到成功' : '延迟签到';
-    time = time.slice(0, 5);
+    if (time) {
+      time=time.slice(0, 5)
+    }
     this.setState({
       selectStu: {
         stu_id: rawData[index].stu_id || '',
@@ -71,20 +80,26 @@ class Detail extends Component {
         time: time || '暂无时间',
       },
     });
+    this.setState({ showCard: true });
   };
 
   render() {
-    const { selectStu, data, percent, rawData } = this.state;
+    const { selectStu, data, percent, showCard } = this.state;
     return (
       <div className={style.container}>
         <NavBar mode="dark" icon={<Icon type="left" />} onLeftClick={() => Router.push('/')}>
           考勤详情
         </NavBar>
         <WingBlank size="lg">
-          <div className={style.gridContainer}>
+          <div
+            className={style.gridContainer}
+            ref={el => {
+              this.grid = el;
+            }}
+          >
             <Grid
               data={data}
-              columnNum={4}
+              columnNum={5}
               onClick={this.handleGridClick}
               renderItem={dataItem => (
                 <div className={style.grid}>
@@ -97,10 +112,10 @@ class Detail extends Component {
             />
           </div>
         </WingBlank>
-        <WingBlank size="lg">
-          <div className={style.cardContainer}>
-            <Card>
-              <Card.Header title={`当前考勤率：${percent}%`} thumb={<BizIcon type="block" />} />
+        <div className={style.cardContainer}>
+          <Card>
+            <Card.Header title={`当前考勤率：${percent}%`} thumb={<BizIcon type="block" />} />
+            {showCard && (
               <Card.Body>
                 <List>
                   <List.Item thumb={<BizIcon type="user" />}>
@@ -117,9 +132,9 @@ class Detail extends Component {
                   </List.Item>
                 </List>
               </Card.Body>
-            </Card>
-          </div>
-        </WingBlank>
+            )}
+          </Card>
+        </div>
       </div>
     );
   }
