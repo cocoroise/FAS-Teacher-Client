@@ -4,7 +4,7 @@
   "description": "人脸考勤系统-教师端",
   "private": true,
   "scripts": {
-    "dev": "cross-env PORT=8099 umi dev",
+    "dev": "cross-env PORT=8098 umi dev",
     "build": "umi build",
     "test": "umi test",
     "analyze": "cross-env ANALYZE=1 umi build",

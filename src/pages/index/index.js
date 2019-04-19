@@ -39,7 +39,6 @@ class Index extends PureComponent {
     if (attendance.time) {
       const { time, duration } = attendance;
       const isOpen = !(Math.abs(Number(timeDiff(time, getDate('H:Mi:S'))) >= duration));
-      console.log('time diff',timeDiff(time, getDate('H:Mi:S')))
       if (!isOpen) {
         delStorage();
       }
@@ -92,9 +91,11 @@ class Index extends PureComponent {
           </div>
         </div>
         {this.state.isOpen && (
+          <div className={styles.noticeBar}>
           <NoticeBar mode="link" onClick={() => Router.push(`/index/detail?id=${attendance_id}`)}>
             您当前有场考勤正在进行，进去看看
           </NoticeBar>
+          </div>
         )}
       </div>
     );

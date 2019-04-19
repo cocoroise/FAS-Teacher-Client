@@ -62,7 +62,6 @@ class Attendance extends PureComponent {
     this.setState({
       [key]: temp,
     });
-    console.log('cccccccid', id, key, cid);
     this.setState({ selectCourse: cid });
   };
 
